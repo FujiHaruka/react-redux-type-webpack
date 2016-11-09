@@ -1,4 +1,4 @@
-import count from './count'
+import * as count from './count'
 
 const actions = Object.assign({},
   count

@@ -33,4 +33,5 @@ tmp
 .DS_Store
 
 public/js/*.bundle.js
+public/js/*.min.js
 public/css

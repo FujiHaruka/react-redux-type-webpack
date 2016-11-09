@@ -19,7 +19,7 @@ const JsConfig = () => {
         [name]: [
           `webpack-dev-server/client?http://${HOST}:${PORT}/`,
           'webpack/hot/dev-server',
-          'babel-polyfill',
+          'babel-polyfill', // TODO いる？
           join(__dirname, JS_ENTRY_PATH, name)
         ]
       })
@@ -35,29 +35,32 @@ const JsConfig = () => {
       }),
       new webpack.HotModuleReplacementPlugin()
     ],
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     module: {
       loaders: [
         {
-          test: /\.js$|\.jsx$/,
-          loader: 'babel',
-          exclude: /node_modules/,
-          include: __dirname,
-          query: {
-            presets: [ 'es2015', 'react', 'react-hmre' ],
-            babelrc: false,
-            compact: false,
-            sourceRoot: __dirname
-          }
+          test: /\.ts(x?)$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/
         },
         {
           test: /\.json$/,
           loader: 'json-loader'
         }
+      ],
+      preLoaders: [
+        {
+          test: /\.js$/,
+          loader: 'source-map-loader'
+        }
       ]
     },
     resolve: {
-      extensions: [ '', '.js', '.jsx', '.json' ]
+      extensions: [ '', '.js', '.jsx', '.ts', '.tsx', '.json' ]
+    },
+    externals: {
+      'react': 'React',
+      'react-dom': 'ReactDOM'
     }
   }
 }
