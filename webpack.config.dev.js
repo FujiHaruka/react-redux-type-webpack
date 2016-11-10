@@ -19,7 +19,6 @@ const JsConfig = () => {
         [name]: [
           `webpack-dev-server/client?http://${HOST}:${PORT}/`,
           'webpack/hot/dev-server',
-          'babel-polyfill', // TODO いる？
           join(__dirname, JS_ENTRY_PATH, name)
         ]
       })

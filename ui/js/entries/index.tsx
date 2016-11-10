@@ -16,4 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     </Provider>,
     rootElement
   )
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('hoge')
+      resolve()
+    }, 500)
+  }).then(() => {
+    console.log('hoge')
+  })
 })

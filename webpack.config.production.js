@@ -14,10 +14,7 @@ const JsConfig = () => {
   return {
     entry: entries.reduce((obj, name) => {
       return Object.assign(obj, {
-        [name]: [
-          'babel-polyfill',
-          join(__dirname, `ui/js/entries/${name}`)
-        ]
+        [name]: [ join(__dirname, `ui/js/entries/${name}`) ]
       })
     }, {}),
     output: {
@@ -30,25 +27,19 @@ const JsConfig = () => {
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      })
+      new webpack.optimize.OccurenceOrderPlugin()
+      // new webpack.optimize.UglifyJsPlugin({
+      //   compress: {
+      //     warnings: false
+      //   }
+      // })
     ],
     module: {
       loaders: [
         {
-          test: /\.js$|\.jsx$/,
-          loader: 'babel',
-          include: __dirname,
-          query: {
-            presets: [ 'es2015', 'react' ],
-            babelrc: false,
-            compact: false,
-            sourceRoot: __dirname
-          }
+          test: /\.ts(x?)$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/
         },
         {
           test: /\.json$/,
@@ -57,7 +48,11 @@ const JsConfig = () => {
       ]
     },
     resolve: {
-      extensions: [ '', '.js', '.jsx', '.json' ]
+      extensions: [ '', '.js', '.jsx', '.ts', '.tsx', '.json' ]
+    },
+    externals: {
+      'react': 'React',
+      'react-dom': 'ReactDOM'
     }
   }
 }
