@@ -5,7 +5,8 @@
   "scripts": {
     "start": "./bin/app.js",
     "dev": "./bin/dev.js",
-    "compile": "webpack --config webpack.config.production.js"
+    "compile": "webpack --config webpack.config.production.js",
+    "prePublish": "./ci/externals.sh && npm run compile"
   },
   "repository": {
     "url": "FujiHaruka/react-redux-type-webpack",
@@ -14,6 +15,7 @@
   "author": "Fuji Haruka",
   "license": "MIT",
   "dependencies": {
+    "@types/mocha": "^2.2.32",
     "@types/react": "^0.14.44",
     "@types/react-dom": "^0.14.18",
     "@types/react-redux": "^4.4.32",
@@ -21,6 +23,7 @@
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
+    "node-sass": "^3.11.2",
     "postcss-loader": "^1.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -34,7 +37,6 @@
     "typescript": "^2.0.8",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.13.1",
-    "@types/mocha": "^2.2.32"
+    "webpack-hot-middleware": "^2.13.1"
   }
 }
